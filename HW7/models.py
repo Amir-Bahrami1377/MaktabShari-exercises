@@ -1,3 +1,4 @@
+from exceptions import UserError
 
 class Quiz:
 
@@ -78,7 +79,12 @@ class Point:
 class User:
 
     def __init__(self, name):
+        self.__check_data(name)
         self.name = name
+
+    def __check_data(self, name):
+        if len(name) < 1:
+            raise UserError("name can't be empty", 'name', name)
 
     def __str__(self):
         return f"live result {self.name} => correct answers: {Point.corrects} && wrong answers: {Point.wrongs} && Noun answers: {Point.not_answered} "
