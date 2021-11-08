@@ -1,4 +1,3 @@
-from random import randint
 import pickle
 
 questions = [
@@ -8,19 +7,10 @@ questions = [
 
 ]
 
+
 def save_pickle():
     with open('questions.pk', "wb") as f:
         pickle.dump(questions, f)
 
 
 save_pickle()
-
-
-def load_pickle():
-    with open('questions.pk', 'rb') as f:
-        return pickle.load(f)
-
-
-random_number = randint(0, 2)
-question_series = load_pickle()
-question_lists = question_series[random_number]
