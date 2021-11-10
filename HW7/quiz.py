@@ -22,7 +22,7 @@ def create_random_questions(data):
     return questions
 
 
-def ask_question(question):
+def ask_question(question, i):
     options = None
     if question.question_type == "multiple_choice":
         options = "[1, 2, 3, 4]"
@@ -30,19 +30,19 @@ def ask_question(question):
         options = "[true, false]"
     elif question.question_type == "short_answer":
         options = "write down the correct answer"
-    return f"Question:\n{question.__call__()}\nOptions: {options}\n"
+    return f"Question {i+1}:\n{question.__call__()}\nOptions: {options}\n"
 
 
 def starting_menu(user: User = None):
     get_question = (question for question in create_random_questions(load_pickle()))
+    score = Score()
     if not user:
         username = input("Please enter your name: \n")
-        score = Score()
-        user = User(username, score)
-
+        user = User(username)
+    user.score = score
     for i in range(questions_count):
         quiz = Quiz(**next(get_question))
-        answer = input(ask_question(quiz))
+        answer = input(ask_question(quiz, i))
         if not answer:
             user.score.not_answered += 1
         else:

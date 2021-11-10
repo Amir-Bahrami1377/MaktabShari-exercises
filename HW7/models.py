@@ -57,7 +57,7 @@ class Score:
 
 
 class User:
-    def __init__(self, name, score: Score):
+    def __init__(self, name, score: Score = None):
         self.__check_data(name)
         self.name = name
         self.score = score
