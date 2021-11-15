@@ -1,18 +1,14 @@
-class User:
-    def __init__(self, name, phone):
-        self.name = name
-        self.phone = phone
+from typing import NoReturn
 
 
 class BankAccount:
 
-    def __init__(self, owner, balance, account_id):
-        self.owner = owner
-        self.balance = balance
+    def __init__(self, account_id, balance):
         self.account_id = account_id
+        self.balance = balance
 
     def __str__(self):
-        return f'Hi {self.owner} welcome. your account balance is {self.balance}'
+        return f'Hi your account balance is {self.balance}'
 
     def deposit(self, amount: float):
         self.balance += amount
@@ -52,3 +48,23 @@ class Travel:
         self.destination_location = destination
         self.travel_time = time
         self.price = price
+
+
+class User:
+    user_id: str
+
+    def __init__(self, name: str, phone: str) -> NoReturn:
+        self.name = name
+        self.phone = phone
+        self.user_id = name.lower() + phone[8:11]
+        self.bank_account = None
+
+    def get_id(self):
+        return f"your id in our system is {self.user_id} \n please try to remember it"
+
+    def set_bank_account(self, balance):
+        self.bank_account = BankAccount(self.user_id, balance)
+        return self.bank_account
+
+    def buy_ticket(self):
+        pass
