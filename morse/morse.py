@@ -1,3 +1,4 @@
+import os
 from abc import ABC, abstractmethod
 from typing import NoReturn
 
@@ -79,10 +80,18 @@ class MorseEncoder(Morse):
             )
         )
 
+    def play(self):
+        morse = self.process()
+        for i in morse:
+            if i == "-":
+                os.system("(speaker-test -t sine -f 1000 ) & pid=$! ; sleep 0.5 ;kill -9 $pid")
+            elif i == ".":
+                os.system("(speaker-test -t sine -f 200 ) & pid=$! ; sleep 0.5 ;kill -9 $pid")
+            os.system("clear")
 
 
 class MorseDecoder(Morse):
-    def __init__(self, data:str) -> NoReturn:
+    def __init__(self, data: str) -> NoReturn:
         super().__init__(data)
 
     def process(self) -> str:
