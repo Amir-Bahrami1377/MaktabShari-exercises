@@ -1,70 +1,70 @@
-from typing import NoReturn
-
-
-class BankAccount:
-
-    def __init__(self, account_id, balance):
-        self.account_id = account_id
-        self.balance = balance
-
-    def __str__(self):
-        return f'Hi your account balance is {self.balance}'
-
-    def deposit(self, amount: float):
-        self.balance += amount
-        print(f'Job done \nYour new balance is: {self.balance}')
-
-    def withdraw(self, amount: float):
-        if amount > self.balance:
-            print('Insufficient Balance!')
-        else:
-            self.balance -= amount
-            if self.balance < 10:
-                self.balance += amount
-                print('Sorry, minimum amount in your account have to be 10$')
-            else:
-                print(f'Job done \nYour remaining balance is: {self.balance}')
-
-
-class MetroCard:
-    pass
-
-
-class CreditCard(MetroCard):
-    pass
-
-
-class DisposableCard(MetroCard):
-    pass
-
-
-class CreditCardWithExpireDate(CreditCard):
-    pass
-
-
-class Travel:
-    def __init__(self, beginning, destination, time, price):
-        self.beginning_location = beginning
-        self.destination_location = destination
-        self.travel_time = time
-        self.price = price
+from datetime import datetime
+from random import randint
+from enum import Enum
 
 
 class User:
-    user_id: str
-
-    def __init__(self, name: str, phone: str) -> NoReturn:
-        self.name = name
+    def __init__(
+            self,
+            full_name: str,
+            phone: str,
+            balance: int = 0,
+            password: str = None,
+            is_admin: bool = False,
+            cart=None
+    ):
+        self.full_name = full_name
         self.phone = phone
-        self.user_id = name.lower() + phone[8:11]
-        self.bank_account = None
+        self.id = full_name + str(randint(10000, 99999))
+        self.is_admin = is_admin
+        self.balance = balance
+        self.password = password
+        self.cart = cart
 
-    def get_id(self):
-        return f"your id in our system is {self.user_id} \n please try to remember it"
+    def deposit(self, amount: int):
+        self.balance += amount
 
-    def set_bank_account(self, balance):
-        self.bank_account = BankAccount(self.user_id, balance)
-        return self.bank_account
+    def withdraw(self, amount: int):
+        if self.balance < amount:
+            raise ValueError
+        self.balance -= amount
 
-    def buy_ticket(self):
-        pass
+    def __str__(self):
+        return f"{self.id} | {self.full_name} | {self.balance} | {self.is_admin}"
+
+
+class Trip:
+    def __init__(self, destination, cost, duration, origin_station):
+        self.destination = destination
+        self.cost = cost
+        self.duration = duration
+        self.origin_station = origin_station
+
+
+class TicketType(str, Enum):
+    TAK_SAFARE = 'tak_safare'
+    CREDIT = 'credit'
+    CREDIT_DATE = 'credit_date'
+
+
+class Ticket:
+    def __init__(self, cart_type: TicketType = TicketType.TAK_SAFARE, expire_date: datetime = None, balance: int = None, ticket_id: int=None):
+        self.cart_type = cart_type
+        self.expire_date = expire_date
+        self.balance = balance
+        if not ticket_id:
+            self.id = randint(1000000, 9999999)
+        else:
+            self.id = ticket_id
+
+    def charge_cart(self, amount: int):
+        self.balance += amount
+
+    def trip_cost_calculation(self, cost):
+        if self.balance < cost:
+            raise ValueError
+        self.balance -= cost
+#
+#
+# new_user = User("Soroush", "09033909142")
+# print(new_user.__str__())
