@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 
 import sys
+import pickle
 from models import User
 
-# TODO save user as pickled object in users
+
 if "createsuperuser" in sys.argv:
     fullname = input("Enter Fullname : ")
     password = input("Enter Password : ")
-    admin = User(full_name=fullname, password=password, phone="15151961", is_admin=True)
+    phone = input("enter your phone number: ")
+    admin = User(full_name=fullname, password=password, phone=phone, is_admin=True)
+
+with open('users.pk', 'ab') as f:
+    pickle.dump(admin, f)
