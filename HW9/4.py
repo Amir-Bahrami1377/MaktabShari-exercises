@@ -1,6 +1,6 @@
 import time
 import logging
-logging.basicConfig(filename='log_speed.logs', level=logging.DEBUG)
+logging.basicConfig(filename='log_msg.logs', level=logging.DEBUG)
 
 
 """
