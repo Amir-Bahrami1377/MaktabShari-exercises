@@ -1,0 +1,9 @@
+select patient_id,(patient.first_name,patient.last_name) as full_name from specimen inner join patient on patient.id = patient_id;
+
+select * from patient where patient.id in (select patient_id from specimen where nurse_id = 1);
+
+select count(*),nurse_id from specimen group by nurse_id where count(nurse_id)>1
+
+select (patient.first_name,patient.last_name) as fullname,nurse.last_name, specimen.data from patient,nurse,specimen where specimen.patient.id AND specimen.nurse_id = nurse.id;
+
+select count(*),patient_id from specimen group by patient_id having count(patient_id)=2;
