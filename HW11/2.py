@@ -2,7 +2,7 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 
-if name == 'main':
+if __name__ == 'main':
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', action="store")
     parser.add_argument('-w', '--word', action='store', type=str)
