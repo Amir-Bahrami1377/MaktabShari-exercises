@@ -1,0 +1,33 @@
+.container {
+    display: table;
+    width: 100%;
+}
+
+.table-row {
+
+  display: table-row;
+  height: 100px;
+}
+.table-cell1 {
+    border: 1px white;
+    background: #ce8888;
+    display: table-cell;
+    padding: 2px;
+}
+
+.table-cell2 {
+    border: 1px white;
+    background: #ce8888;
+    display: table-cell;
+    padding: 2px;
+}
+
+.text{
+    padding: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    div.table-cell1 {
+        display: none;
+    }
+}
