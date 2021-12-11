@@ -2,16 +2,32 @@
 from datetime import datetime
 from random import randint
 from enum import Enum
+from abc import ABC
+
+
+class DBModel(ABC):  # abstract base Database model
+    TABLE: str  # table name
+    PK: str  # primary key column of the table
+
+    def __str__(self) -> str:
+        return f"<{self.__class__.__name__} {vars(self)}>"
+
+
+class Patient(DBModel):  # Patient model
+    TABLE = 'patient'
+    PK = 'id'
+
+    def __init__(self, first_name, last_name, phone, national_id, age, id=None) -> None:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone = phone
+        self.national_id = national_id
+        self.age = age
+        if id: self.id = id
 
 
 class User:
-    def __init__(
-            self,
-            full_name: str,
-            phone: str,
-            balance: int = 0,
-            cart=None
-    ):
+    def __init__(self, full_name: str, phone: str, balance: int = 0, cart=None):
         self.full_name = full_name
         self.phone = phone
         self.id = full_name + str(randint(10000, 99999))
@@ -27,14 +43,13 @@ class User:
         self.balance -= amount
 
     def __str__(self):
-        return f"{self.id} | {self.full_name} | {self.balance}"
+        return f"id: {self.id} | name: {self.full_name} | balance: {self.balance}"
 
 
 class SuperUser(User):
     def __init__(self, full_name: str, phone: str, balance: int = 0, cart=None, password: str = None):
         super().__init__(full_name, phone, balance, cart)
         self._password = password
-        
 
 
 class Trip:
