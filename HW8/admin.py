@@ -13,3 +13,5 @@ if "createsuperuser" in sys.argv:
 
 with open('users.pk', 'ab') as f:
     pickle.dump(admin, f)
+
+print(f'superuser {fullname} created')

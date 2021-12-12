@@ -13,18 +13,13 @@ class DBModel(ABC):  # abstract base Database model
 
 
 class DBManager:
-    DEFAULT_HOST = "localhost"
-    DEFAULT_USER = "amir"
-    DEFAULT_PASSWORD = "amir1377"
-    DEFAULT_PORT = 5432
-    DEFAULT_DATABASE = "metro"
 
-    def __init__(self, database=DEFAULT_DATABASE, user=DEFAULT_USER, host=DEFAULT_HOST, port=DEFAULT_PORT, password=DEFAULT_PASSWORD) -> None:
-        self.database = database
-        self.user = user
-        self.host = host
-        self.port = port
-        self.password = password
+    def __init__(self) -> None:
+        self.database = "metro"
+        self.user = "amir"
+        self.host = "localhost"
+        self.port = 5432
+        self.password = "amir1377"
 
         self.conn: connection = psycopg2.connect(dbname=self.database, user=self.user, password=self.password, host=self.host, port=self.port)
 

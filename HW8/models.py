@@ -64,7 +64,3 @@ class Ticket:
         if self.balance < cost:
             raise ValueError
         self.balance -= cost
-#
-#
-# new_user = User("Soroush", "09033909142")
-# print(new_user.__str__())

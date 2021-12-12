@@ -5,17 +5,15 @@ from enum import Enum
 from abc import ABC
 
 
-
-class User(DBModel):
-    def __init__(self, full_name: str, phone: str, balance: int = 0, cart=None):
+class Users(DBModel):
+    def __init__(self, full_name: str, phone: str, balance: int = 0):
         self.full_name = full_name
+        self.username = full_name + str(randint(10000, 99999))
         self.phone = phone
-        self.id = full_name + str(randint(10000, 99999))
         self.balance = balance
-        self.cart = cart
 
-    TABLE = "user"
-    PK = f"{__init__().id}"
+    TABLE = "users"
+    PK = "username"
 
     def deposit(self, amount: int):
         self.balance += amount
@@ -26,16 +24,17 @@ class User(DBModel):
         self.balance -= amount
 
     def __str__(self):
-        return f"id: {self.id} | name: {self.full_name} | balance: {self.balance}"
+        return f"username: {self.username} | name: {self.full_name} | balance: {self.balance}"
 
 
-class SuperUser(User, DBModel):
-    def __init__(self, full_name: str, phone: str, balance: int = 0, cart=None, password: str = None):
-        super().__init__(full_name, phone, balance, cart)
+class SuperUser(Users, DBModel):
+    def __init__(self, full_name: str, phone: str, password: str, balance: int = 0):
+        super().__init__(full_name, phone, balance)
         self._password = password
 
     TABLE = "superuser"
-    PK = f"{__init__().id}"
+    PK = "username"
+
 
 class Trip:
     def __init__(self, destination, cost, duration, origin_station):
@@ -43,7 +42,6 @@ class Trip:
         self.cost = cost
         self.duration = duration
         self.origin_station = origin_station
-
 
 
 class TicketType(str, Enum):
@@ -67,3 +65,8 @@ class Ticket:
         if self.balance < cost:
             raise ValueError
         self.balance -= cost
+
+
+dbmanager = DBManager()
+amir = Users("amirhosein", "09354468749", 5000)
+dbmanager.create(amir)
