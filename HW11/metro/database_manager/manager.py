@@ -1,21 +1,32 @@
 import psycopg2
 import psycopg2.extras
 from psycopg2._psycopg import connection, cursor
-from metro.model import DBModel
+from abc import ABC
+
+
+class DBModel(ABC):  # abstract base Database model
+    TABLE: str  # table name
+    PK: str  # primary key column of the table
+
+    def __str__(self) -> str:
+        return f"<{self.__class__.__name__} {vars(self)}>"
 
 
 class DBManager:
     DEFAULT_HOST = "localhost"
-    DEFAULT_USER = "postgres"
+    DEFAULT_USER = "amir"
+    DEFAULT_PASSWORD = "amir1377"
     DEFAULT_PORT = 5432
+    DEFAULT_DATABASE = "metro"
 
-    def __init__(self, database, user=DEFAULT_USER, host=DEFAULT_HOST, port=DEFAULT_PORT) -> None:
+    def __init__(self, database=DEFAULT_DATABASE, user=DEFAULT_USER, host=DEFAULT_HOST, port=DEFAULT_PORT, password=DEFAULT_PASSWORD) -> None:
         self.database = database
         self.user = user
         self.host = host
         self.port = port
+        self.password = password
 
-        self.conn: connection = psycopg2.connect(dbname=self.database, user=self.user, host=self.host, port=self.port)
+        self.conn: connection = psycopg2.connect(dbname=self.database, user=self.user, password=self.password, host=self.host, port=self.port)
 
     def __del__(self):
         self.conn.close()  # Close the connection on delete
