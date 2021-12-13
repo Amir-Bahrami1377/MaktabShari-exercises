@@ -43,7 +43,7 @@ class DBManager:
                 curs.execute(
                     f"""INSERT INTO {model_instance.TABLE}({model_fields_str}) VALUES ({model_values_str}) RETURNING ID;""",
                     model_values_tuple)
-                id = int(curs.fetchone()['id'])  # get ID of inserted row
+                id = str(curs.fetchone()['id'])  # get ID of inserted row
                 setattr(model_instance, 'id', id)  # set ID into the input model_instance
                 return id
 

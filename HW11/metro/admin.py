@@ -1,5 +1,6 @@
 from model import SuperUser
 import argparse
+from database_manager.manager import DBModel, DBManager
 
 
 if __name__ == '__main__':
@@ -11,4 +12,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     admin = SuperUser(full_name=args.fullname, password=args.password, phone=args.phone, balance=args.balance)
-    print(admin)
+    dbmanager = DBManager()
+    dbmanager.create(admin)
+    print(f"admin created and id is {admin.id}")

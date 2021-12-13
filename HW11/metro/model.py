@@ -6,14 +6,17 @@ from abc import ABC
 
 
 class Users(DBModel):
-    def __init__(self, full_name: str, phone: str, balance: int = 0):
+    def __init__(self, full_name: str, phone: str, balance: int = 0, id=None):
         self.full_name = full_name
-        self.username = full_name + str(randint(10000, 99999))
         self.phone = phone
         self.balance = balance
+        if not id:
+            self.id = full_name + str(randint(10000, 99999))
+        else:
+            self.id = id
 
     TABLE = "users"
-    PK = "username"
+    PK = "id"
 
     def deposit(self, amount: int):
         self.balance += amount
@@ -24,16 +27,16 @@ class Users(DBModel):
         self.balance -= amount
 
     def __str__(self):
-        return f"username: {self.username} | name: {self.full_name} | balance: {self.balance}"
+        return f"id: {self.id} | name: {self.full_name} | balance: {self.balance}"
 
 
 class SuperUser(Users, DBModel):
-    def __init__(self, full_name: str, phone: str, password: str, balance: int = 0):
-        super().__init__(full_name, phone, balance)
-        self._password = password
+    def __init__(self, full_name: str, phone: str, password: str, balance: int = 0, id=None):
+        super().__init__(full_name, phone, balance, id)
+        self.password = password
 
     TABLE = "superuser"
-    PK = "username"
+    PK = "id"
 
 
 class Trip:
@@ -68,5 +71,10 @@ class Ticket:
 
 
 dbmanager = DBManager()
-amir = Users("amirhosein", "09354468749", 5000)
-dbmanager.create(amir)
+# data = Users("ahmad", "09214478155", 4000)
+# dbmanager.create(data)
+data = dbmanager.read(Users, 'ahmad80592')
+# print(type(data))
+# data.deposit(50)
+print(data)
+# dbmanager.update(data)
