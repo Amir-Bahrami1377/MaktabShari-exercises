@@ -52,7 +52,9 @@ class DBManager:
         with self.conn:
             curs = self.__get_cursor()
             with curs:
-                curs.execute(f"""SELECT * FROM {model_class.TABLE} WHERE {model_class.PK} = {pk}""")
+                pk ="'"+pk+"'"
+                curs.execute(f"SELECT * FROM {model_class.TABLE} WHERE {model_class.PK} = {pk}")
+                # curs.execute("select * from users where id='mmd49078'")
                 res = curs.fetchone()
                 return model_class(**dict(res))  # returns an instance of the Model with inserted values
 
