@@ -1,52 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .header{
-            display: table-header-group;
-            background-color: deepskyblue;
-            height: 50px;
-        }
-        .content{
-            display: table-cell;
-            height: 200px;
-        }
-
-        .flex-container {
-            display: flex;
-            align-items: center;
-            height: 200px;
-            background-color: white;
-            float: right;
-        }
-
-        .flex-container > div {
-
-            background-color: #f1f1f1;
-            width: 100px;
-            height: 200px;
-            text-align: center;
-            line-height: 75px;
-            font-size: 30px;
-        }
-
-        .footer{
-            background-color: deepskyblue;
-            width: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="./t2.css">
 </head>
+
 <body>
-<div class="header"><h1 style="color: #f1f1f1; padding: 5px">Header</h1></div>
-<div class="content">
-    <div class="flex-container">
-        <h1 style="margin-right: 480px">Main</h1>
-        <div style="background-color: aqua"><p>SideBar</p></div>
-        <div style="background-color: blueviolet"><p>Nav</p></div>
+    <div class="wrapper">
+        <header class="header">
+            <h2>Header</h2>
+        </header>
+        <main class="main">
+            <div class="content-item">
+                <h2>main</h2>
+            </div>
+            <div class="content-item">
+                <h2>sidebar</h2>
+            </div>
+            <div class="content-item">
+                <h2>nav</h2>
+            </div>
+        </main>
+        <footer class="footer">
+            <h2>footer</h2>
+        </footer>
     </div>
-</div>
-<div class="footer"><h1 style="color: #f1f1f1; padding: 5px">Footer</h1></div>
 </body>
+
 </html>
