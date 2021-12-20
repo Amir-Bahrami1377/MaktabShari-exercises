@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>T2</title>
+</head>
+<body>
+<h1>HW13</h1>
+
+<p id="average"></p>
+<p id="pic-check"></p>
+
+<script>
+
+    let salaries= [];
+    let pics= [];
+
+    class user
+    {   constructor(name, age, profile_pic, salary)
+        {
+            this.name=name;
+            this.age=age;
+            this.profilePic=profile_pic;
+            this.salary=salary;
+        }
+    }
+
+    function salaryAverage()
+        {
+            const sum = salaries.reduce((partial_sum, a) => partial_sum + a, 0);
+            return sum / salaries.length
+        }
+    function picValueConverter(item){
+        if (item ==="yes"){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    function picChecker(value){
+        while (true){
+            if(value.pop() === false){
+                break
+                return false
+            }
+        }
+    }
+
+    let users = [];
+    while (true) {
+        let inputText = prompt("vared kon");
+        if (inputText === "") {
+            break;
+        }
+        let splitedText = inputText.split(",");
+        users.push(new user(splitedText[0], splitedText[1], picValueConverter(splitedText[2]), splitedText[3]));
+        salaries.push(Number(splitedText[3]));
+        pics.push(picValueConverter(splitedText[2]));
+
+    }
+    console.table(users);
+    document.getElementById("average").innerHTML = "average of salaries is: " + " " + salaryAverage() + " $";
+    document.getElementById("pic-check").innerHTML = "do all have pic: " + " " + picChecker(pics);
+
+    /*
+    amir,21,yes,100
+    akbar,18,no,200
+    erf,22,no,200
+    */
+
+</script>
+
+</body>
+</html>
