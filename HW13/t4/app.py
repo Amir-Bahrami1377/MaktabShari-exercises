@@ -9,6 +9,16 @@ db = SQLAlchemy(app)
 
 
 app.add_url_rule('/', 'index', index)
+app.add_url_rule('/login', 'login', login)
+app.add_url_rule('/sign-up', 'sign-up', sign_up)
+
+
+
+
+
+# class User(db.Model):
+#     id = db.column(db.Integer, primary_key=True)
+
 
 
 if __name__ == '__main__':
