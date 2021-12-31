@@ -1,0 +1,38 @@
+body {
+    font-family: "Raleway", Arial, sans-serif
+}
+
+#about-col > p, #about-col > form {
+}
+
+#gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#about-col .form-control, #about-col .btn {
+    border-radius: 0;
+}
+
+#about-col label {
+    font-weight: bold;
+}
+
+#hidden-container {
+    position: fixed;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.47);
+    display: none;
+    text-align: center;
+    overflow-y: scroll;
+    justify-content: center;
+    align-content: center;
+}
+
+#hidden-container > img {
+    max-width: 90%;
+
+}

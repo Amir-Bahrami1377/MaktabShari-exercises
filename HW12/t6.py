@@ -1,6 +1,6 @@
 import requests
 
-query = 12345
+query = 94485
 while True:
     url = f'http://www.pythonchallenge.com/pc/def/linkedlist.php?'
     response = requests.get(url, params={'nothing': f'{query}'})
