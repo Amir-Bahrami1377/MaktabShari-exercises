@@ -1,0 +1,8 @@
+# created by virtualenv automatically
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+HW14/__pycache__
