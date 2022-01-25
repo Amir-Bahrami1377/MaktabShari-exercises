@@ -33,7 +33,8 @@ def create(request):
             if cd.get('detail'):
                 post.detail = cd.get('detail')
             if cd.get('author'):
-                post.author = cd.get('author')
+                author_list = cd.get('author').split()
+                post.author = author_list
             if cd.get('image_path'):
                 post.image_path = cd.get('image_path')
             if cd.get('link_url'):

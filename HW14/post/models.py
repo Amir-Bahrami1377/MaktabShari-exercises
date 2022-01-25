@@ -12,7 +12,7 @@ class Post(Document):
     title = StringField(max_length=120, required=True)
     content = StringField()
     detail = StringField()
-    author = StringField()
+    author = ListField(StringField(max_length=30))
     image_path = StringField()
     link_url = StringField()
     created_at = DateTimeField(default=datetime.datetime.utcnow())

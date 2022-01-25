@@ -4,9 +4,17 @@
 
     <a class="btn btn-danger" href="{% url 'delete' post.title %}">Delete</a>
 
-    <h2>{{ post.title }}</h2>
+    <h2>{{ post.title }}</h2><br>
+
+    {% if post.author %}
+        <h4>authors: </h4>
+        {% for writer in post.author %}
+            <small>{{ writer }}</small>
+        {% endfor %}
+    {% endif %}
+
     {% if post.image_path %}
-        <img src="{{ post.image_path }}">
+        <br><img style="height: 400px; width: 400px" src="{{ post.image_path }}">
     {% endif %}
 
     {% if post.content %}
@@ -25,7 +33,7 @@
     {% endif %}
 
     {% if post.link_url %}
-        <a href="{{ post.link_url }}">reference</a>
+        <br><a href="{{ post.link_url }}">reference</a>
     {% endif %}
     {% if post.created_at %}
         <p>{{ post.created_at }}</p>
