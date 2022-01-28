@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from post.models import Post, Comment
 from post.forms import CreatePostForm, UpdatePostForm
 
 
 def home(request):
-    posts = Post.objects
+    posts = Post.objects.order_by('-created_at', 'title')
     return render(request, 'home.html', context={'posts': posts})
 
 
@@ -62,9 +63,9 @@ def update(request, post_title):
         post1.update(author=str_author)
 
     if request.method == 'POST':
-        Post.objects(title=f'{post_title}').delete()
         form = UpdatePostForm(request.POST)
         if form.is_valid():
+            Post.objects(title=f'{post_title}').delete()
             cd = form.cleaned_data
             post = Post()
             if cd.get('title'):

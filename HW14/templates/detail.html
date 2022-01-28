@@ -15,7 +15,7 @@
     {% endif %}
 
     {% if post.image_path %}
-        <br><img style="height: 400px; width: 400px" src="{{ post.image_path }}">
+        <br><img style="height: 400px; width: 400px" src="{{ post.image_path }}" alt="">
     {% endif %}
 
     {% if post.content %}
@@ -39,5 +39,17 @@
     {% if post.created_at %}
         <p>{{ post.created_at }}</p>
     {% endif %}
+    <div class="card" style="background:rosybrown; padding: 0px">
+
+        <h2>Last Comments :</h2>
+        {% if post.comments %}
+            {% for comment in post.comments %}
+                <h5>{{ comment.name }} :</h5>
+                <p>{{ comment.content }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
 
 {% endblock %}
