@@ -31,7 +31,7 @@ def update_post(cd, post_pk:ObjectId):
     post = Post.objects(pk=post_pk)
     post = post.get(pk=post_pk)
     if cd.get('title'):
-        if len(Post.objects(title=cd.get('title'))) != 0:
+        if len(Post.objects(title=cd.get('title'))) != 0 and post.title != cd.get('title'):
             return False
         else:
             post.title = cd.get('title')
