@@ -9,7 +9,7 @@
             <a class="card-body" href="{% url 'details' post.title %}" style="padding: 0px"><h3>{{ post.title }}</h3></a><br/>
             <img style="width: 200px; height: 200px" src="{{ post.image_path }}" alt="">
             {% if post.content %}
-                <p>{{ post.content }}</p>
+                <p>post is about : {{ post.content }}</p>
             {% endif %}
             <p>created at: {{ post.created_at }}</p>
         </div>

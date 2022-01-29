@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from post.models import Post, Comment
 from post.utils import create_post, update_post
-from post.forms import CreatePostForm, UpdatePostForm
+from post.forms import CreatePostForm, UpdatePostForm, CreateCommentForm
 
 
 class HomeView(View):
@@ -14,7 +14,23 @@ class HomeView(View):
 class DetailView(View):
     def get(self, request, post_title):
         post = Post.objects(title=f'{post_title}')
-        return render(request, 'detail.html', context={'post': post[0]})
+        post = post.get(title=f'{post_title}')
+        form = CreateCommentForm()
+        return render(request, 'detail.html', context={'post': post, 'form': form})
+
+    def post(self, request, post_title):
+        post = Post.objects(title=f'{post_title}')
+        post = post.get(title=f'{post_title}')
+        form = CreateCommentForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            coments = post.comments
+            coments.append(Comment(name= cd.get('name'), content= cd.get('content')))
+            post.comments = coments
+            post.save()
+            form = CreateCommentForm()
+            return render(request, 'detail.html', context={'post': post, 'form': form})
+
 
 
 class CreateView(View):

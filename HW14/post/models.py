@@ -6,8 +6,8 @@ from mongo import *
 
 
 class Comment(EmbeddedDocument):
-    content = StringField()
     name = StringField(max_length=120)
+    content = StringField()
 
 
 class Post(Document):
