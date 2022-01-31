@@ -32,7 +32,6 @@ class DetailView(View):
             return render(request, 'detail.html', context={'post': post, 'form': form})
 
 
-
 class CreateView(View):
     def get(self, request):
         form = CreatePostForm()
