@@ -54,15 +54,17 @@ class UpdateView(View):
         post = Post.objects(title=f'{post_title}')
         post = eval(post.to_json())
         post = post[0]
-        print(post)
         if post.get('tags'):
             str_tags = ' '.join(post.get('tags'))
             post.update(tags=str_tags)
+        else:
+            post.update(tags='')
         if post.get('author'):
             str_author = ' '.join(post.get('author'))
             post.update(author=str_author)
+        else:
+            post.update(author='')
         form = UpdatePostForm(data=post)
-        print(post)
         return render(request, 'update.html', context={'form': form})
 
     def post(self, request, post_title):
