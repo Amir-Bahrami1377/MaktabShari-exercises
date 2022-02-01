@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views import View
 from post.models import Post, Comment
 from post.utils import create_post, update_post
@@ -46,6 +47,7 @@ class CreateView(View):
             if not post_instance:
                 return redirect('create')
             post_instance.save()
+            messages.success(request, 'post created successfully', 'success')
         return redirect('home')
 
 
@@ -79,12 +81,15 @@ class UpdateView(View):
                 return redirect('update')
             else:
                 post_instance.save()
+                messages.success(request, 'post updated successfully', 'success')
                 return redirect('home')
 
 
-def delete(request, post_title):
-    Post.objects(title=f'{post_title}').delete()
-    return redirect('home')
+class DeleteView(View):
+    def get(self, request, post_title):
+        Post.objects(title=f'{post_title}').delete()
+        messages.success(request, 'post deleted successfully', 'success')
+        return redirect('home')
 
 
 # post = Post.objects(title='post2')
