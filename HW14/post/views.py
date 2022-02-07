@@ -43,9 +43,10 @@ class CreateView(View):
             cd = form.cleaned_data
             post_instance = create_post(cd=cd)
             if not post_instance:
-                return redirect('create')
+                return render(request, 'create.html', context={'form': form})
             post_instance.save()
-        return redirect('home')
+            return redirect('home')
+        return render(request, 'create.html', context={'form': form})
 
 
 class UpdateView(View):
